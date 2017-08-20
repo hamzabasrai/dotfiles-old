@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Ignore duplicate commands in the history
+export HISTCONTROL=ignoredups
+
+# Increase max number of lines in history file
+export HISTFILESIZE=1000
+
+# Increase max number of commands to remember
+export HISTSIZE=1000
+
+# Don't clear screen after quitting a manual page
+export MANPAGER="less -X"
+
+# Make new shells get the history from all previous
+# shells instead of "last window closed"
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"

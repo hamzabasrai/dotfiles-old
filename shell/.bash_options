@@ -1,0 +1,14 @@
+#!bin/bash
+
+# Autocorrect typos in path names when using cd command
+shopt -s cdspell
+
+# Check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS
+shopt -s checkwinsize
+
+# Append to the bash history file, rather than overwriting
+shopt -s histappend
+
+# Case-insensitive globbing (used in pathname extension)
+shopt -s nocaseglob

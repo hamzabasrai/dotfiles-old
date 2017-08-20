@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Make tab autocomplete regardless of filename
+set completion-ignore-case on
