@@ -3,3 +3,5 @@
 # Please adapt and uncomment the following lines:
   name = "Hamza Basrai"
   email = hamza.basrai@gmail.com
+[push]
+	default = simple
