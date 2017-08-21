@@ -19,3 +19,5 @@ fi
 if [ -f ~/.inputrc ]; then
   . ~/.inputrc
 fi
+
+cd
