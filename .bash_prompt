@@ -68,7 +68,7 @@ white=$(tput setaf 7);
 
 # Begin building Prompt (PS1 Variable)
 if [[ "${SSH_TTY}" ]]; then
-  PS1+="${yellow}SSH ${reset}";
+  PS1="${yellow}SSH ${reset}";
 else
   PS1="";
 fi
