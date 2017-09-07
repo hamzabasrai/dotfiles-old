@@ -42,9 +42,9 @@ git_prompt() {
                   echo '(Unkown)')";
 
     [ -n "${s}" ] && s=" ${s}";
-      echo -e "$(tput setab 4 && tput setaf 2)${1}${branchName}${s} $(tput sgr0 && tput setaf 4)";
+      echo -e "$(tput setaf 2) (${branchName}${s})$(tput sgr0)";
     else
-      echo -e "$(tput sgr0 && tput setaf 2)";
+      echo -e "$(tput sgr0)";
       return; 
   fi
 }
@@ -66,21 +66,10 @@ magenta=$(tput setaf 5);
 cyan=$(tput setaf 6);
 white=$(tput setaf 7);
 
-#Colored Bars
-pmptGray=$(tput setab 8 && tput setaf 7);
-pmptGrayToGreen=$(tput setab 2 && tput setaf 8);
-pmptGreenToBlue=$(tput setab 4 && tput setaf 2);
-pmptGreemTerminate=$(tput sgr0 && tput setaf 2);
-pmptBlueTerminate=$(tput sgr0 && tput setaf 4);
-
 # Begin building Prompt (PS1 Variable)
 PS1="";
-PS1="${pmptGray} ${USER} ${pmptGrayToGreen} \w ";
+PS1="\A ${cyan}${USER} ${white}\w";
 
 # Git Status & Branch
-PS1+="\$(git_prompt \"\[${white}\]  \")"; # Git repository details
-PS1+="${reset}\n$ ";
+PS1+="\$(git_prompt) $ "; # Git repository details
 export PS1;
-
-PS2="\[${yellow}\]→ \[${reset}\]";
-export PS2;
