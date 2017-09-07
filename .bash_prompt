@@ -67,8 +67,13 @@ cyan=$(tput setaf 6);
 white=$(tput setaf 7);
 
 # Begin building Prompt (PS1 Variable)
-PS1="";
-PS1="\A ${cyan}${USER} ${white}\w";
+if [[ "${SSH_TTY}" ]]; then
+  PS1+="${yellow}SSH ${reset}";
+else
+  PS1="";
+fi
+
+PS1+="\A ${cyan}${USER} ${white}\w";
 
 # Git Status & Branch
 PS1+="\$(git_prompt) $ "; # Git repository details
