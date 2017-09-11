@@ -73,7 +73,7 @@ else
   PS1="";
 fi
 
-PS1+="\A ${cyan}${USER} ${white}\w";
+PS1+="\A ${cyan}${USER} ${white}\W";
 
 # Git Status & Branch
 PS1+="\$(git_prompt) $ "; # Git repository details
