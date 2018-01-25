@@ -5,3 +5,5 @@
   email = hamza.basrai@gmail.com
 [push]
 	default = simple
+[core]
+	editor = vim
