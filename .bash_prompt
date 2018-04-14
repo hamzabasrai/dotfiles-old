@@ -1,53 +1,82 @@
 #!/bin/bash
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# [!] Don't break this function into smaller, more specialized ones
+# as you will only pollute the global space even more. This function
+# cannot be unset because it's called every time the prompt string
+# is shown.
+
 git_prompt() {
-  local s='';
-  local branchName='';
 
-  # Check if current directory is in a Git repository
-  if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
+    local branchName=""
+    local tmp=""
 
-    # Check if the current directory is in .git before running git checks
-    if [ "$(git rev-parse --is-inside-git-dir 2> /dev/null)" == 'false' ]; then
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-      #Ensure index is up to date
-      git update-index --really-refresh -q &>/dev/null;
+    # Check if the current directory is in a Git repository.
 
-      # Check for uncommitted changes in index
-      if ! $(git diff --quiet --ignore-submodules --cached); then
-        s+='+';
-      fi
-  
-      # Check for unstaged changes
-      if ! $(git diff-files --quiet --ignore-submodules --); then
-        s+='!';
-      fi
-  
-      # Check for untracked files 
-      if [ -n "$(git ls-files --others --exclude-standard)" ]; then
-        s+='?';
-      fi
-      
-      # Check for stashed files   
-      if $(git rev-parse --verify refs/stash &>/dev/null); then
-        s+='$';
-      fi
+    ! git rev-parse &>/dev/null \
+        && return
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # Check if in `.git/` directory (some of the following
+    # checks don't make sense/won't work in the `.git` directory).
+
+    [ "$(git rev-parse --is-inside-git-dir)" == "true" ] \
+        && return
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # Check for uncommitted changes in the index.
+
+    if ! git diff --quiet --ignore-submodules --cached; then
+        tmp="$tmp+";
     fi
-      
-    # Get the short symbolic ref
-    # If HEAD isn't a symbolic ref, get the short SHA for last commit
-    # Otherwise, give up
-    branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
-                  git rev-parse --short HEAD 2> /dev/null || \
-                  echo '(Unkown)')";
 
-    [ -n "${s}" ] && s=" ${s}";
-      echo -e "$(tput setaf 2) (${branchName}${s})$(tput sgr0)";
-    else
-      echo -e "$(tput sgr0)";
-      return; 
-  fi
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # Check for unstaged changes.
+
+    if ! git diff-files --quiet --ignore-submodules --; then
+        tmp="$tmp!";
+    fi
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # Check for untracked files.
+
+    if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+        tmp="$tmp?";
+    fi
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # Check for stashed files.
+
+    if git rev-parse --verify refs/stash &>/dev/null; then
+        tmp="$tmp$";
+    fi
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    [ -n "$tmp" ] \
+        && tmp=" [$tmp]"
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    branchName="$( printf "%s" "$( git rev-parse --abbrev-ref HEAD 2> /dev/null \
+        || git rev-parse --short HEAD 2> /dev/null \
+        || printf " (unknown)" )" | tr -d "\n" )"
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    printf "%s" "$1$branchName$tmp"
+
 }
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 #Reset all colors
 tput sgr0;
@@ -73,8 +102,8 @@ else
   PS1="";
 fi
 
-PS1+="\A ${cyan}${USER} ${white}\W";
+PS1+="\A ${cyan}${USER} ${white}\W ";
 
 # Git Status & Branch
-PS1+="\[\$(git_prompt)\] $ "; # Git repository details
+PS1+="\[${green}\$(git_prompt)\] ${white}\n$ "; # Git repository details
 export PS1;
