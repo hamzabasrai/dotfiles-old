@@ -1,4 +1,10 @@
 #!/bin/bash
 
-# Make tab autocomplete regardless of filename
+# Make tab autocomplete case-insensitive
 set completion-ignore-case on
+
+# Disable beeping and window flashing
+set bell-style none
+
+# Auto list tab completions
+set show-all-if-ambiguous off
