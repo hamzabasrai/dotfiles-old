@@ -12,3 +12,19 @@ shopt -s histappend
 
 # Case-insensitive globbing (used in pathname extension)
 shopt -s nocaseglob
+
+# Automatically append 'cd' to directory names
+shopt -s autocd
+
+# Save all lines of a multiple-line comman in the same history entry
+shopt -s cmdhist
+
+# Include filenames beginning with a '.' in the filename expansion
+shopt -s dotglob
+
+# Use extended pattern matching features
+shopt -s extglob
+
+# Do not attempt to search  PATH for completions when
+# completion is attempted on an empty line
+shopt -s no_empty_cmd_completion
