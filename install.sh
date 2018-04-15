@@ -1,22 +1,33 @@
 #!/bin/bash
 
-files=".bash_aliases .bash_exports .bash_options .bash_colors .bash_prompt .bashrc .gitignore .gitconfig .gitattributes .hushlogin .inputrc .curlrc .profile"
+create_symlinks() {
+  declare -a FILES_TO_SYMLINK=(
+    "shell/bash_aliases"
+    "shell/bash_exports"
+    "shell/bash_logout"	  
+    "shell/bash_options"
+    "shell/bash_prompt"	  
+    "shell/bashrc"
+    "shell/inputrc"
+    "shell/profile"
 
-echo "Backing up files"
-mkdir -p ~/dotfiles_old
+    "git/gitattributes"
+    "git/gitconfig"  
+    "git/gitignore"
+  )
 
-cd ~/dotfiles
+	
+  for file in ${FILES_TO_SYMLINK[@]}; do
+    
+    sourceFile="$(pwd)/$file"
+    targetFile="$HOME/.$(printf "%s" "$file" | sed "s/.*\/\(.*\)/\1/g")"
 
-for file in $files; do
-  if [ -f ~/$file ]; then
-    mv ~/$file ~/dotfiles_old
-    echo "$file backed up"
-  fi
-done
+    if [ ! -e "$targetFile" ]; then
+      eval "ln -sf $sourceFile $targetFile"  
+    fi
+  done
+}
 
-for file in $files; do
-  ln -s ~/dotfiles/$file ~/$file
-  echo "Linking $file"
-done
+create_symlinks
 
 source ~/.profile
