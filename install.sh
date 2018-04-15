@@ -1,6 +1,6 @@
 #!/bin/bash
 
-files=".bash_aliases .bash_exports .bash_options .bash_prompt .bashrc .gitignore .gitconfig .gitattributes .hushlogin .inputrc .profile"
+files=".bash_aliases .bash_exports .bash_options .bash_colors .bash_prompt .bashrc .gitignore .gitconfig .gitattributes .hushlogin .inputrc .curlrc .profile"
 
 echo "Backing up files"
 mkdir -p ~/dotfiles_old
