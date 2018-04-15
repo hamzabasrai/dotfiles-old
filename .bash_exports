@@ -1,13 +1,23 @@
 #!/bin/bash
 
-# Ignore duplicate commands in the history
-export HISTCONTROL=ignoredups
+# Set vim as default editor
+export EDITOR="vim"
+
+# Ignore commands that start with spaces and duplicates
+export HISTCONTROL=ignoreboth
+
+# don't add certain commands to history file
+export HISTIGNORE="&:[bf]g:c:clear:history:exit:q:pwd:* --help"
 
 # Increase max number of lines in history file
-export HISTFILESIZE=1000
+export HISTFILESIZE=10000
 
 # Increase max number of commands to remember
-export HISTSIZE=1000
+export HISTSIZE=10000
+
+# Prefer US English and UTF-8 encoding
+export LANG="en_US"
+export LC_ALL="en_US.UTF-8"
 
 # Don't clear screen after quitting a manual page
 export MANPAGER="less -X"
