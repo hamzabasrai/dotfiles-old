@@ -102,8 +102,11 @@ else
   PS1="";
 fi
 
-PS1+="\A ${cyan}${USER} ${white}\W ";
+PS1+="\[$reset\]\A "                            # System Time
+PS1+="$cyan\u "                                 # Username
+PS1+="$white\w"                                 # Working directory
+PS1+="\[\$(git_prompt \"$white on $green\")\]"  # Git Repository Details
+PS1+="\n"                                       # Newline
+PS1+="\[$white\]$ \[$reset\]"                   # '$' Prompt
 
-# Git Status & Branch
-PS1+="\[${green}\$(git_prompt)\] ${white}\n$ "; # Git repository details
 export PS1;
