@@ -32,7 +32,7 @@ create_symlinks() {
 
 setup_vim_env() {
     
-    declare -r VUNDLE_DIR="$HOME/.vim/plugins/Vundle.vim"
+    declare -r VUNDLE_DIR="$HOME/.vim/bundle/Vundle.vim"
     declare -r VUNDLE_REPO_URL="https://github.com/VundleVim/Vundle.vim"
     
     eval \
@@ -41,7 +41,11 @@ setup_vim_env() {
         && printf '\n' | vim +PluginInstall +qall 
 }
 
+echo "Creating symlinked dotfiles"
 create_symlinks
+
+echo "Installing Vim Plugins"
 setup_vim_env &> /dev/null
 
+echo "Dotfiles successfully installed"
 source ~/.profile
