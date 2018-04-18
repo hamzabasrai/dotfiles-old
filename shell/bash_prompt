@@ -78,35 +78,63 @@ git_prompt() {
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-#Reset all colors
-tput sgr0;
+enable_color_support() {
+    if [[ $COLORTERM == gnome-* && $TERM == xterm ]] \
+        && infocmp gnome-256color &> /dev/null; then
+        export TERM="gnome-256color"
+    elif infocmp xterm-256color &> /dev/null; then
+        export TERM="xterm-256color"
+    fi
 
-#Create variable references
-bold=$(tput bold);
-underlineStart=$(tput smul);
-underlineEnd=$(tput rmul);
-reset=$(tput sgr0);
-black=$(tput setaf 0);
-red=$(tput setaf 1);
-green=$(tput setaf 2);
-yellow=$(tput setaf 3);
-blue=$(tput setaf 4);
-magenta=$(tput setaf 5);
-cyan=$(tput setaf 6);
-white=$(tput setaf 7);
+    # Load color support.
+    source ~/dotfiles/shell/bash_colors
 
-# Begin building Prompt (PS1 Variable)
-if [[ "${SSH_TTY}" ]]; then
-  PS1="${yellow}SSH ${reset}";
-else
-  PS1="";
-fi
+}
 
-PS1+="\[$reset\]\A "                            # System Time
-PS1+="$cyan\u "                                 # Username
-PS1+="$white\w"                                 # Working directory
-PS1+="\[\$(git_prompt \"$white on $green\")\]"  # Git Repository Details
-PS1+="\n"                                       # Newline
-PS1+="\[$white\]$ \[$reset\]"                   # '$' Prompt
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-export PS1;
+set_PS1_prompt() {
+    
+    local reset=$(tput sgr0 2> /dev/null)
+
+    local green=$(tput setaf 2)
+    local yellow=$(tput setaf 3)
+    local cyan=$(tput setaf 6)
+    local white=$(tput setaf 7)
+    
+    if [[ "${SSH_TTY}" ]]; then                    # Add SSH indicator
+        PS1="${yellow}SSH $reset"
+    else
+        PS1="$reset"
+    fi
+    
+    PS1+="\[$reset\]\A "                            # System Time
+    PS1+="\[$cyan\]\u "                             # Username
+    PS1+="\[$white\]\w"                             # Working directory
+    PS1+="\[\$(git_prompt \"$white on $green\")\]"  # Git Repository Details
+    PS1+="\n"                                       # Newline
+    PS1+="\[$white\]$ \[$reset\]"                   # '$' Prompt
+    
+    export PS1;
+}
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+main() {
+    enable_color_support
+    set_PS1_prompt
+}
+
+main
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+unset -f enable_color_support
+unset -f main
+unset -f set_PS1_prompt
+
+
+
+
+
+
+
