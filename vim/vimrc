@@ -100,7 +100,6 @@ call vundle#begin("~/.vim/plugins")
     Plugin 'flazz/vim-colorschemes'
     Plugin 'scrooloose/nerdtree'
     Plugin 'valloric/youcompleteme'
-    Plugin 'nathanaelkane/vim-indent-guides'
     
 call vundle#end()
 
@@ -111,10 +110,8 @@ call vundle#end()
 filetype on
 
 " ----------------------------------------------------------------------
-"  " | Color Scheme                                                       |
-"  " ----------------------------------------------------------------------
+" | Color Scheme                                                       |
+" ----------------------------------------------------------------------
 set t_Co=256
 set background=dark
-colorscheme sunburst
-highlight Normal ctermbg=NONE
-highlight nonText ctermbg=NONE
+colorscheme DevC++
