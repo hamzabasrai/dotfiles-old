@@ -1,2 +1,3 @@
 # dotfiles
-Linux Bash and Git config files
+Config files for Bash shell, git, and Vim
+
