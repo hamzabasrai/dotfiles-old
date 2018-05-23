@@ -9,3 +9,6 @@ npm_debug.log
 
 #Idea
 .idea/
+
+#Build
+build/
