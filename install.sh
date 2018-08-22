@@ -30,8 +30,21 @@ create_symlinks() {
     done
 }
 
+create_vim_directories() {
+    declare -r SWAP_DIR="$HOME/.vim/swaps"
+    declare -r BACKUP_DIR="$HOME/.vim/backups"
+
+    eval \
+        rm -rf $SWAP_DIR $BACKUP_DIR \
+        && mkdir $SWAP_DIR \
+        && mkdir $BACKUP_DIR
+}
+
 echo "Creating symlinked dotfiles"
 create_symlinks
+
+echo "Setting up Vim directories"
+create_vim_directories
 
 echo "Dotfiles successfully installed"
 source ~/.profile

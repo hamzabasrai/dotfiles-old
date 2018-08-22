@@ -80,4 +80,3 @@ set expandtab                  " ┘
 " ----------------------------------------------------------------------
 set t_Co=256
 set background=dark
-colorscheme 0x7A69_dark
