@@ -76,40 +76,6 @@ set shiftwidth=4               " │
 set expandtab                  " ┘
 
 " ----------------------------------------------------------------------
-" | Plugins                                                            |
-" ----------------------------------------------------------------------
-" Use Vundle to manage the Vim plugins.
-" https://github.com/VundleVim/Vundle.vim
-
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-" Disable file type detection
-" (this is required by Vundle).
-filetype off
-
-" Include Vundle in the runtime path.
-set runtimepath+=~/.vim/bundle/Vundle.vim
-
-" Initialize Vundle and specify the path
-" where the plugins should be installed.
-
-call vundle#begin("~/.vim/plugins")
-    
-    Plugin 'VundleVim/Vundle.vim'
-    
-    Plugin 'flazz/vim-colorschemes'
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'valloric/youcompleteme'
-    
-call vundle#end()
-
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-" Re-enable file type detection
-" (disabling it was required by Vundle).
-filetype on
-
-" ----------------------------------------------------------------------
 " | Color Scheme                                                       |
 " ----------------------------------------------------------------------
 set t_Co=256
