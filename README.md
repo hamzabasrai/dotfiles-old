@@ -2,7 +2,7 @@
 Config files for quick Bash terminal setup
 
 ## git
-* [gitattributes](https://github.com/hamzabasrai/dotfiles/blob/master/git/gitattriburtes)
+* [gitattributes](https://github.com/hamzabasrai/dotfiles/blob/master/git/gitattributes)
 * [gitconfig](https://github.com/hamzabasrai/dotfiles/blob/master/git/gitconfig)
 * [gitignore](https://github.com/hamzabasrai/dotfiles/blob/master/git/gitignore)
 
