@@ -18,7 +18,6 @@
   git = !exec git # Allow '$ git git git...'
   ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]" --decorate --numstat
   ls = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]" --decorate --date=relative
-  cl = clone
   ph = push
   pl = pull
   r = rebase
