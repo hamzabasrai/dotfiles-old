@@ -14,6 +14,7 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/git
     zgen oh-my-zsh plugins/sudo
     zgen oh-my-zsh plugins/command-not-found
+    zgen oh-my-zsh plugins/asdf
 
     zgen load zsh-users/zsh-syntax-highlighting
     zgen load zsh-users/zsh-autosuggestions
@@ -51,21 +52,9 @@ HISTFILE=~/.zsh_history
 # Ignore the most common commands in history
 export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
-
-# # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.yarn/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-
-export LOCAL_IP="ipconfig getifaddr en0"
-
-# Serve and watch the files in the present working directory on posrt 3000
-alias serve="browser-sync start -s -f . --no-notify --host $LOCAL_IP --port 3000"
-
 alias g="git"
 alias m="man"
 alias rm="rm -r"
 alias path='printf "%b\n" "${PATH//:/\\n}"'
 alias v="vim"
 alias c="clear"
-alias reload="source ~/.zshrc"
-
-alias zshconfig="code ~/.zshrc"

@@ -5,3 +5,6 @@
 [submodule "zsh/zgen"]
 	path = zsh/zgen
 	url = https://github.com/tarjoilija/zgen.git
+[submodule "zsh/asdf"]
+	path = zsh/asdf
+	url = https://github.com/asdf-vm/asdf.git

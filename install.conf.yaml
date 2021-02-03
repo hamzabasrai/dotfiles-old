@@ -7,8 +7,12 @@
 
 - link:
     ~/.dotfiles: ''
+    ~/.zshrc:
+      path: zsh/zshrc
+      force: true
     ~/.zgen: zsh/zgen
-    ~/.zshrc: zsh/zshrc
+    ~/.asdf: zsh/asdf
+
     ~/.gitconfig: git/gitconfig
     ~/.gitattributes: git/gitattributes
     ~/.tmux.conf: tmux.conf
