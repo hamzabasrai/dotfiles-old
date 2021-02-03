@@ -1,0 +1,45 @@
+# Git Log Format Options
+# Full list available here: https://www.git-scm.com/docs/git-log
+  # %h - Abbreviated commit hash
+  # %cr - Comitter date, relative
+  # %d - Ref names (branches)
+  # %s - Commit message
+  # %an - Author name
+
+[user]
+  name = "Hamza Basrai"
+  email = hamza.basrai@gmail.com
+
+[push]
+  default = simple
+
+[core]
+  editor = vim
+  pager = less -iXFR
+
+[alias]	
+  git = !exec git # Allow '$ git git git...'
+  
+  # Staging
+  a = add
+  d = diff
+  s = status -s
+  unstage = reset HEAD --
+
+  # Repo Management
+  br = branch
+  cl = clone
+  co = checkout
+  f = fetch
+  ph = push
+  pl = pull
+  r = rebase
+  
+  # Commits
+  c = commit
+  undolast = reset HEAD~1
+  editlast = commit --amend
+
+  # Git Log
+  ls = log --format='%C(yellow)%h %C(cyan)%cr%C(red)%d %C(reset)%s %C(green)[%an] %C(reset)'
+  last = ls -1 HEAD

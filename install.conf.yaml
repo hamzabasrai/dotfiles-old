@@ -7,10 +7,12 @@
 
 - link:
     ~/.dotfiles: ''
+    ~/.zgen: zsh/zgen
     ~/.zshrc: zsh/zshrc
+    ~/.gitconfig: git/gitconfig
+    ~/.gitattributes: git/gitattributes
     ~/.tmux.conf: tmux.conf
     ~/.vimrc: vimrc
-    ~/.zgen: zsh/zgen
 
 - create:
     - ~/.vim/undo-history
