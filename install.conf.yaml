@@ -7,9 +7,10 @@
 
 - link:
     ~/.dotfiles: ''
-    ~/.zshrc: zshrc
+    ~/.zshrc: zsh/zshrc
     ~/.tmux.conf: tmux.conf
     ~/.vimrc: vimrc
+    ~/.zgen: zsh/zgen
 
 - create:
     - ~/.vim/undo-history

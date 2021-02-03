@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+export DOTFILES="$HOME/.dotfiles"
+
+# Get zgen
+source ~/.zgen/zgen.zsh
+
+# Generate zgen init.sh if it doesn't exist
+if ! zgen saved; then
+    echo "Creating a zgen save"
+    zgen oh-my-zsh
+
+    # Plugins
+    zgen oh-my-zsh plugins/git
+    zgen oh-my-zsh plugins/sudo
+    zgen oh-my-zsh plugins/command-not-found
+
+    zgen load zsh-users/zsh-syntax-highlighting
+    zgen load zsh-users/zsh-autosuggestions
+
+    # Theme
+    zgen load https://gist.github.com/b1cc49535c2f5ad955feecc2f6544606.git oxide
+    
+    # Generate init.sh
+    zgen save
+fi
+
+# History Options
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_all_dups
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_reduce_blanks
+setopt hist_save_no_dups
+setopt hist_verify
+
+# Share history across all your terminal windows
+setopt share_history
+
+# set some more options
+setopt pushd_ignore_dups
+#setopt pushd_silent
+
+# Increase history size
+HISTSIZE=100000
+SAVEHIST=100000
+HISTFILE=~/.zsh_history
+
+# Ignore the most common commands in history
+export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+
+
+# # If you come from bash you might have to change your $PATH.
+export PATH=$HOME/.yarn/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+
+export LOCAL_IP="ipconfig getifaddr en0"
+
+# Serve and watch the files in the present working directory on posrt 3000
+alias serve="browser-sync start -s -f . --no-notify --host $LOCAL_IP --port 3000"
+
+alias g="git"
+alias m="man"
+alias rm="rm -r"
+alias path='printf "%b\n" "${PATH//:/\\n}"'
+alias v="vim"
+alias c="clear"
+alias reload="source ~/.zshrc"
+
+alias zshconfig="code ~/.zshrc"
