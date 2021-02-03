@@ -1,0 +1,82 @@
+" ----------------------------------------------------------------------
+" | General                                                            |
+" ----------------------------------------------------------------------
+set nocompatible 	       " Don't make Vim vi-compatible
+syntax on		       " Enable syntax highlighting
+
+if has("autocmd")
+    filetype plugin indent on
+    "           │     │    └──── Enable file type detection.
+    "           │     └───────── Enable loading of indent file.
+    "           └─────────────── Enable loading of plugin files.
+endif
+
+set autoindent                 " Copy indent to the new line.
+
+set backspace=indent           " ┐
+set backspace+=eol             " │ Allow `backspace`
+set backspace+=start           " ┘ in insert mode.
+
+set backupdir=~/.vim/backups   " Set directory for backup files.
+
+set backupskip=/tmp/*          " ┐ Don't create backups
+set backupskip+=/private/tmp/* " ┘ for certain files.
+
+set clipboard=unnamed          " ┐
+                               " │ Use the system clipboard
+if has("unnamedplus")          " │ as the default register.
+    set clipboard+=unnamedplus " │
+endif                          " ┘
+
+set cpoptions+=$               " When making a change, don't
+                               " redisplay the line, and instead,
+                               " put a `$` sign at the end of
+                               " the changed text.
+
+set directory=~/.vim/swaps     " Set directory for swap files.
+set encoding=utf-8 nobomb      " Use UTF-8 without BOM.
+set history=5000               " Increase command line history.
+set hlsearch                   " Enable search highlighting.
+set ignorecase                 " Ignore case in search patterns.
+
+set incsearch                  " Highlight search pattern
+                               " as it is being typed.
+
+set laststatus=2               " Always show the status line.
+
+set lazyredraw                 " Do not redraw the screen while
+                               " executing macros, registers
+                               " and other commands that have
+                               " not been typed.
+
+set magic                      " Enable extended regexp.
+set mousehide                  " Hide mouse pointer while typing.
+set noerrorbells               " Disable error bells.
+
+set nojoinspaces               " When using the join command,
+                               " only insert a single space
+                               " after a `.`, `?`, or `!`.
+
+set nostartofline              " Kept the cursor on the same column.
+set number                     " Show line number.
+
+set numberwidth=3              " Increase the minimal number of
+                               " columns used for the `line number`.
+
+set showcmd                    " Show the command being typed.
+set showmode                   " Show current mode.
+
+set synmaxcol=2500             " Limit syntax highlighting (this
+                               " avoids the very slow redrawing
+                               " when files contain long lines).
+
+set tabstop=4                  " ┐
+set softtabstop=4              " │ Set global <TAB> settings.
+set shiftwidth=4               " │
+set expandtab                  " ┘
+
+" ----------------------------------------------------------------------
+" | Color Scheme                                                       |
+" ----------------------------------------------------------------------
+set t_Co=256
+set background=dark
