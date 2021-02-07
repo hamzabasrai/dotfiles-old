@@ -53,9 +53,5 @@ HISTSIZE=10000                                  # Maximum events for internal hi
 SAVEHIST=10000                                  # Maximum events in history file
 HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"  # Ignore the most common commands in history
 
-alias g="git"
-alias m="man"
-alias rm="rm -r"
-alias path='printf "%b\n" "${PATH//:/\\n}"'
-alias v="vim"
-alias c="clear"
+# Aliases
+source $ZSHDIR/aliases.zsh
