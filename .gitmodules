@@ -8,3 +8,6 @@
 [submodule "zsh/asdf"]
 	path = zsh/asdf
 	url = https://github.com/asdf-vm/asdf.git
+[submodule "plugins/dotbot-asdf"]
+	path = plugins/dotbot-asdf
+	url = https://github.com/sobolevn/dotbot-asdf.git
