@@ -25,3 +25,14 @@
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
+
+- asdf:
+    - plugin: python
+    - plugin: nodejs
+    - plugin: ruby
+
+- shell:
+    - [
+        "bash -c '${HOME}/.asdf/plugins/nodejs/bin/import-release-team-keyring'",
+        Importing Node.js PGP keys,
+      ]
