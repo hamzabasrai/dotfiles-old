@@ -20,7 +20,7 @@ if ! zgen saved; then
     zgen load zsh-users/zsh-autosuggestions
 
     # Theme
-    zgen load https://gist.github.com/b1cc49535c2f5ad955feecc2f6544606.git oxide
+    zgen load $DOTFILES/zsh/oxide.zsh-theme
     
     # Generate init.sh
     zgen save
