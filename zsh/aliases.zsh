@@ -6,9 +6,7 @@ alias path='printf "%b\n" "${PATH//:/\\n}"'
 alias v="vim"
 
 # Moving Files
-alias cp='cp -iv'
-alias mv='mv -iv'
-alias rm='rm -i'
+alias rm='rm -r'
 
 # Miscellaneous 
 alias h="history"
