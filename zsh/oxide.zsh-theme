@@ -28,26 +28,16 @@ autoload -U add-zsh-hook
 autoload -Uz vcs_info
 
 # Use True color (24-bit) if available.
-if [[ "${terminfo[colors]}" -ge 256 ]]; then
-    oxide_turquoise="%F{73}"
-    oxide_orange="%F{179}"
-    oxide_red="%F{167}"
-    oxide_limegreen="%F{107}"
-else
-    oxide_turquoise="%F{cyan}"
-    oxide_orange="%F{yellow}"
-    oxide_red="%F{red}"
-    oxide_limegreen="%F{green}"
-fi
-
-# Reset color.
-oxide_reset_color="%f"
+turquoise="%F{73}"
+orange="%F{179}"
+red="%F{167}"
+green="%F{107}"
 
 # VCS style formats.
-FMT_UNSTAGED="%{$oxide_reset_color%} %{$oxide_orange%}●"
-FMT_STAGED="%{$oxide_reset_color%} %{$oxide_limegreen%}✚"
-FMT_ACTION="(%{$oxide_limegreen%}%a%{$oxide_reset_color%})"
-FMT_VCS_STATUS="on %{$oxide_turquoise%}%b%u%c%{$oxide_reset_color%}"
+FMT_UNSTAGED=" %{$orange%}●"
+FMT_STAGED=" %{$green%}✚"
+FMT_ACTION="%f(%{$green%}%a%f)"
+FMT_VCS_STATUS="%fon %{$turquoise%}%b%u%c%f"
 
 zstyle ':vcs_info:*' enable git svn
 zstyle ':vcs_info:*' check-for-changes true
@@ -62,12 +52,30 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 +vi-git-untracked() {
     if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
             git status --porcelain | grep --max-count=1 '^??' &> /dev/null; then
-        hook_com[staged]+="%{$oxide_reset_color%} %{$oxide_red%}●"
+        hook_com[staged]+="%f %{$red%}●"
     fi
 }
 
+prompt_precmd() {
+    # Pass a line before each prompt
+    print -P ''
+}
+
+virtualenv_prompt_info() {
+  [[ -n ${VIRTUAL_ENV} ]] || return
+  echo "venv:%{$orange%}${VIRTUAL_ENV:t}"
+}
+
+# Disables prompt mangling in virtualenv/bin/activate
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
 # Executed before each prompt.
 add-zsh-hook precmd vcs_info
+add-zsh-hook precmd prompt_precmd
 
-# Oxide prompt style.
-PROMPT=$'\n%D{%I:%M%p}%{$oxide_limegreen%} %~%{$oxide_reset_color%} ${vcs_info_msg_0_}\n%(?.%{%F{white}%}.%{$oxide_red%})%(!.#.$)%{$oxide_reset_color%} '
+RPROMPT='$(virtualenv_prompt_info)'                 # Active Python virtualenv
+
+PROMPT='%D{%I:%M%p} '                               # Current time of day in 12 hour format
+PROMPT+='%{$green%}%~ '                             # Current path
+PROMPT+=$'${vcs_info_msg_0_}\n'                     # Git Repo Info
+PROMPT+='%(?.%{%F{white}%}.%{$red%})%(!.#.>)%f '    # Prompt character > or # if root
