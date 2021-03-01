@@ -11,7 +11,6 @@
       path: zsh/zshrc
       force: true
     ~/.zgen: zsh/zgen
-    ~/.asdf: zsh/asdf
     ~/.gitconfig: git/gitconfig
     ~/.gitattributes: git/gitattributes
     ~/.tmux.conf: tmux.conf
@@ -24,19 +23,3 @@
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
-
-- asdf:
-    - plugin: python
-      global: 3.9.1
-      versions:
-        - 3.9.1
-    - plugin: nodejs
-      global: 14.15.4
-      versions:
-        - 14.15.4
-
-- shell:
-    - [
-        "bash -c '${HOME}/.asdf/plugins/nodejs/bin/import-release-team-keyring'",
-        Importing Node.js PGP keys,
-      ]
