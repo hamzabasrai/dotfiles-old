@@ -3,6 +3,8 @@
 export DOTFILES="$HOME/.dotfiles"
 export ZSHDIR="$DOTFILES/zsh"
 
+ZSH_DISABLE_COMPFIX=true
+
 # Get zgen
 source ~/.zgen/zgen.zsh
 
