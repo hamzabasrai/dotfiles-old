@@ -13,6 +13,9 @@
 [push]
   default = simple
 
+[pull]
+	rebase = false
+
 [core]
   editor = vim
   pager = less -iXFR
