@@ -11,3 +11,8 @@ alias rm='rm -r'
 # Miscellaneous 
 alias h="history"
 alias c="clear"
+
+# Docker
+alias dc="docker-compose"
+alias dcd="docker-compose down"
+alias dcu="docker-compose up"
