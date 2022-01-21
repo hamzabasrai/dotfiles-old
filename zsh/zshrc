@@ -57,3 +57,24 @@ HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"  # Ignore the most common command
 
 # Aliases
 source $ZSHDIR/aliases.zsh
+
+alias fellow="source ~/.local/venvs/fellow/bin/activate"
+alias cel="celery -A server.fellow worker -Ofair --beat --loglevel=debug -Q background,search_notes,search_calendar,search,billing,integrations_google_calendar,integrations_google_sync,integrations_office365_calendar,integrations_office365_sync,integrations_asana,integrations_zapier,relationships,celery,realtime"
+alias mpy="./manage.py"
+
+# Python
+export PYTHONWARNINGS=ignore::DeprecationWarning
+
+# Kubectl
+export KUBECONFIG=/Volumes/keybase/team/fellowinsights/kubeconfig
+
+# Functions
+prodshell () {
+    ADMINPOD=$(kubectl get pods --namespace prod | awk '/(admin-[-\d\w]*)/ {print $1;exit;}')
+    if [[ "$1" == "plus" ]]; then
+        COMMAND=(python manage.py shell_plus)
+    else
+        COMMAND=(/bin/bash)
+    fi
+    kubectl exec $ADMINPOD -n prod -it -- "${COMMAND[@]}"
+}

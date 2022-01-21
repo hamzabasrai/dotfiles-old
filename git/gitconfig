@@ -9,9 +9,10 @@
 [user]
   name = "Hamza Basrai"
   email = hamza.basrai@gmail.com
+  signingKey = 1CABF220A12BF76EFAD42DCD8420ACE20907EC91
 
 [push]
-  default = simple
+  default = current
 
 [pull]
 	rebase = false
@@ -46,3 +47,6 @@
   # Git Log
   ls = log --format='%C(yellow)%h %C(cyan)%cr%C(red)%d %C(reset)%s %C(green)[%an] %C(reset)'
   last = ls -1 HEAD
+
+[commit]
+	gpgsign = true
